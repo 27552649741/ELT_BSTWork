@@ -18,24 +18,26 @@ void msg(void)
 // 为二叉排序树插入数据
 // ------------------------------------
 
-// int BST_Insert(BSTree &T, int k)
-// {
-//     if(T == NULL)
-//     {
-//         BSTree T = new BSTNode;
-//         T->data = k;
-//         T->Lchild = NULL;
-//         T->Rchild = NULL;
-//         return OK;
-//     }
-//     else if(k == T->data)
-//         return FALSE;
-//     else if(k < T->data)
-//         return BST_Insert(T->Lchild, k);
-//     else
-//         return BST_Insert(T->Rchild, k);
-// } // BST_Insert
+// 递归算法(有错)
+int BST_Insert(BSTree &T, int k)
+{
+    if(T == NULL)
+    {
+        BSTree T = new BSTNode;
+        T->data = k;
+        T->Lchild = NULL;
+        T->Rchild = NULL;
+        return OK;
+    }
+    else if(k == T->data)
+        return FALSE;
+    else if(k < T->data)
+        return BST_Insert(T->Lchild, k);
+    else
+        return BST_Insert(T->Rchild, k);
+} // BST_Insert
 
+// 非递归算法(可运行)
 int BST_Insert_NonRecur(BSTree &T, int k)
 {
     BSTNode* pre = NULL;  // 记录上一个结点

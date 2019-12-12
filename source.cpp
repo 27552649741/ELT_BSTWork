@@ -18,6 +18,8 @@ void getChoice(void)
             break;
 
         case 2:
+            cout << "Enter the elem:" << endl;
+            cin >> e;
             BST_Delete(T, BST_Search(T, e));
             cout << "\nDelete Finished." << endl;
             break;
@@ -28,6 +30,9 @@ void getChoice(void)
             break;
 
         case 9:
+            TreeDestroy(T);
+            cout << "\nDestroy Finished." << endl;
+            break;
             
         case 0:
             exit(1);
