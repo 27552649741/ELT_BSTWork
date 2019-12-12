@@ -17,23 +17,57 @@ void msg(void)
 // ------------------------------------
 // 为二叉排序树插入数据
 // ------------------------------------
-int BST_Insert(BSTree &T, int k)
+
+// int BST_Insert(BSTree &T, int k)
+// {
+//     if(T == NULL)
+//     {
+//         BSTree T = new BSTNode;
+//         T->data = k;
+//         T->Lchild = NULL;
+//         T->Rchild = NULL;
+//         return OK;
+//     }
+//     else if(k == T->data)
+//         return FALSE;
+//     else if(k < T->data)
+//         return BST_Insert(T->Lchild, k);
+//     else
+//         return BST_Insert(T->Rchild, k);
+// } // BST_Insert
+
+int BST_Insert_NonRecur(BSTree &T, int k)
 {
-    if(T == NULL)
+    BSTNode* pre = NULL;  // 记录上一个结点
+    BSTNode* t = T;
+    while(t != NULL)
     {
-        BSTree T = new BSTNode;
-        T->data = k;
-        T->Lchild = NULL;
-        T->Rchild = NULL;
-        return OK;
+        pre = t;
+        if(k < t->data)
+            t = t->Lchild;
+        else if(k > t->data)
+            t = t->Rchild;
+        else
+            return 0;
     }
-    else if(k == T->data)
-        return FALSE;
-    else if(k < T->data)
-        return BST_Insert(T->Lchild, k);
+ 
+    BSTNode* node = new BSTNode;
+    node->data = k;
+    node->Lchild = NULL;
+    node->Rchild = NULL;
+    node->parent = pre;
+ 
+    if(pre == NULL)
+        T = node;
     else
-        return BST_Insert(T->Rchild, k);
-} // BST_Insert
+    {
+        if(k < pre->data)
+            pre->Lchild = node;
+        else
+            pre->Rchild = node;
+    }
+    return 1;
+}
 
 // ------------------------------------
 // 创建二叉排序树
@@ -42,7 +76,8 @@ void Create_BST(BSTree &T, int arr[], int n)
 {
     T = NULL; // 初始时为空树
     for (int i = 0; i < n; ++i)
-        BST_Insert(T, arr[i]);
+        BST_Insert_NonRecur(T, arr[i]);
+        // BST_Insert(T, arr[i]);
 } // Create_BST
 
 // ------------------------------------

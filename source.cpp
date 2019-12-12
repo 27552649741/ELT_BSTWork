@@ -6,7 +6,6 @@ void getChoice(void)
     BSTree T;
     int arr[15] = {19, 38, 12, 40, 41, 39, 54, 76, 35, 47, 80, 14, 9, 44, 60};
     ElemType e;
-
     do
     {
         msg();
